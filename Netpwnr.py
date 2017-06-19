@@ -574,7 +574,7 @@ class info_search():
 print "[*] récupération des documents spécifiques"
 myinstanceglobal = info_search()
 myinstanceglobal.main_infosearch()
-print "[*] fichier enregistré sous collecte.zip
+print "[*] fichier enregistré sous collecte.zip"
 
 for i in ip_range:
 	current_target = ip_start + str(i)
