@@ -557,7 +557,7 @@ class info_search():
 
         	elif self.all == False and self.char == False and self.format == False and self.browser == False and self.database == False:
             		#sys.exit()
-			print "y'asun bug"
+			print "y'asun bug 1"
             		#and self.hash == False
 
 
@@ -569,7 +569,7 @@ class info_search():
                 		myinstance.archivage()
             		except:
                 		#sys.exit()
-				print "y'asun bug"
+				print "y'asun bug 2"
 
 
 #main
