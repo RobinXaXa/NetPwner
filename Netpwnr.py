@@ -556,7 +556,7 @@ class info_search():
 
 
         	elif self.all == False and self.char == False and self.format == False and self.browser == False and self.database == False:
-            		sys.exit()
+            		#sys.exit()
 
             		#and self.hash == False
 
@@ -568,7 +568,7 @@ class info_search():
             		try:
                 		myinstance.archivage()
             		except:
-                		sys.exit()
+                		#sys.exit()
 
 
 #main
