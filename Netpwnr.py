@@ -192,10 +192,10 @@ def smtp_enum(host,port):
 		connect=s.connect((host,port)) 
 	except socket.timeout: 
 	  	print "\n[-] Server timed out" 
-		continue
+		
 	except socket.error: 
 	  	print "\n[-] There was an error with the server" 
-		continue
+		
 	print "[+] Connected on" +timer() 
 	print "[+] Waiting for SMTP banner" 
 	banner=s.recv(1024) 
