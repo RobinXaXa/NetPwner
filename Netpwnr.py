@@ -320,7 +320,7 @@ class info_search():
                     		if extension == 'vsd' or extension == 'vsdx':
                         		#Copie des fichiers trouvees dans la destination qui va bien
                         		shutil.copy2(dirName+'\\'+file, path_docs)
-                   		 if extension == 'zip' or extension == 'rar':
+                   		if extension == 'zip' or extension == 'rar':
                        		 	#Copie des fichiers trouvees dans la destination qui va bien
                        		 	shutil.copy2(dirName+'\\'+file, path_docs)
                     		elif extension != 'doc' or extension != 'docx' or extension != 'xls' or extension != 'xlsx' or extension != 'csv' or extension != 'ppt' or extension != 'pptx' or extension != 'txt' or extension != 'pst' or extension != 'jpg' or extension != 'png' or extension != 'pdf' or extension != 'vsd' or extension != 'vsdx' or extension != 'zip' or extension != 'rar':
