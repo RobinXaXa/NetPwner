@@ -1217,7 +1217,7 @@ class HTTPSExfiltrationClient():
 
 		try:
 			packet_length = chr(len(dat))
-			except ValueError:
+		except ValueError:
 			sys.stderr.write("[-]\tData is too long to send.\n")
 			return 1
 
