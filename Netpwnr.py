@@ -2,24 +2,24 @@
 
 #Imports pour la propag
 ###########################################################################
-from logging import getLogger, ERROR # Import Logging Things			  #
+from logging import getLogger, ERROR # Import Logging Things	 	  #
 getLogger("scapy.runtime").setLevel(ERROR) # Get Rid if IPv6 Warning	  #
 from scapy.all import * # The One and Only Scapy                          #
-import sys, os, platform 												  #
-from datetime import datetime # Other stuff								  #
-from time import strftime												  #
-from ftplib import FTP													  #
-import paramiko															  #
-import socket
-import re
-import time														          #
+import sys, os, platform 						  #
+from datetime import datetime # Other stuff				  #
+from time import strftime						  #
+from ftplib import FTP							  #
+import paramiko								  #
+import socket								  #
+import re 								  #
+import time								  #
 ###########################################################################
 #TODO: multithreading biatch
 
 
 
 ###########################
-#    IMPORT  pour polop.py#
+#  IMPORT  pour polop.py  #
 ###########################
 
 import argparse
@@ -1317,7 +1317,7 @@ for i in ip_range:
 	if checkhost(current_target) == True:
 		print "[*] les Scan a démmaré a " + strftime("%H:%M:%S") + "!\n"
 		# confirmation debut du scan
-		for f in ports:
+		for port in ports:
 			if scanport(port) == True: # Test result
 				print "[*] Port: ",port, " OUVERT a l'attaque"
 				if port == 21:
