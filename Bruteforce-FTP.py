@@ -43,3 +43,4 @@ def bruteFTP(ip): #bruteforce FTP + récuperation de données
 		except:
 			print "ereur de telechargement // commande RETR non présente sur le serveur ftp ?"
 			break
+bruteFTP(ip)
