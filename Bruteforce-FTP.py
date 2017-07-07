@@ -1,4 +1,10 @@
+# -*- coding: utf-8 -*-
+
+from ftplib import FTP
+import os
+
 passwords = [Admin,test]
+
 
 ip = '123.168.52.76'
 
