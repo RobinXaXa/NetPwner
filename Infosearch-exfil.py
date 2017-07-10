@@ -112,7 +112,7 @@ class info_search():
 				shutil.copy2(dirName+'\\'+file, dataDump)
 			except:
 			    print("[Error] Extension '"+extension+"' non prise en charge")
-		print("[DONE] parse with char")
+		print("[DONE] parse with all")
 
 				
 	def parse_with_char(self):
