@@ -244,9 +244,9 @@ class info_search():
 
         	myinstance = info_search().parse_all()
 		
-		    try:
+		try:
 			myinstance.archivage()
-		    except:
+		except:
 			print("[Error] zip error")
 
 	#myinstanceglobal = info_search()
