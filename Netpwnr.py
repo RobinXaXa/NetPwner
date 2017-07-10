@@ -65,7 +65,7 @@ import socket
 ###########################################################################
 ports = [21, 22, 25, 445 ] # ports a scanner
 ip_start = "192.168.52."
-ip_range = range(2, 256)
+ip_range = range(51, 80)
 start_clock = datetime.now() # Start clock for scan time
 interface = "eth0" #utilisé dans la récuparation d'adresses MAC
 gateIP = "192.168.0.1"
