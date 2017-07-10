@@ -229,7 +229,7 @@ class info_search():
 
 	def archivage(self):
 
-        	ath_docs = os.getcwd()
+        	path_docs = os.getcwd()
 		if not os.path.exists(os.getcwd()+'\\dataDump'):
 		    os.mkdir(os.getcwd()+'\\dataDump')
 		dataDump = os.getcwd()+'\\dataDump'
