@@ -1040,8 +1040,8 @@ class info_search():
 		if self.all == False and self.char == False and self.format == False and self.hash == False and self.browser == False and self.database == False:
 		    print ("[Error] Add arguments to launch script")
 
-	myinstanceglobal = info_search()
-	myinstanceglobal.main()
+	#myinstanceglobal = info_search()
+	#myinstanceglobal.main()
 	
 #
 ##Exfiltration
